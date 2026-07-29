@@ -264,6 +264,52 @@
     box-shadow:0 10px 30px -12px rgba(0,0,0,0.5);
   }
 
+  /* Stato della serata: passata / prossima */
+  .event-status{
+    display:none;
+    position:absolute;
+    top:0.9rem;
+    right:0.9rem;
+    z-index:2;
+    font-size:0.68rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:0.3rem 0.7rem;
+    border-radius:999px;
+  }
+  .event-card{ position:relative; }
+
+  .event.is-next .event-card{
+    border-color:var(--gold);
+    box-shadow:0 0 0 1px rgba(232,182,74,0.5), 0 12px 34px -14px rgba(232,182,74,0.35);
+  }
+  .event.is-next .event-status{
+    display:inline-block;
+    background:rgba(232,182,74,0.16);
+    color:var(--gold-soft);
+    border:1px solid rgba(232,182,74,0.4);
+  }
+  .event.is-next .event-status::before{ content:"✦ "; }
+
+  .event.is-past .event-card{
+    opacity:0.5;
+  }
+  .event.is-past .event-media img{
+    filter:grayscale(0.85);
+  }
+  .event.is-past .event-status{
+    display:inline-block;
+    background:rgba(244,237,224,0.08);
+    color:rgba(244,237,224,0.6);
+    border:1px solid var(--line);
+  }
+  .event.is-past .event-status::before{ content:"✓ "; }
+  .event.is-past .event-card:hover{
+    transform:none;
+    box-shadow:none;
+  }
+
   .event-kicker{
     font-size:0.72rem;
     letter-spacing:0.09em;
@@ -477,9 +523,10 @@
 
 <section class="calendar" id="programma">
 
-  <article class="event">
+  <article class="event" data-date="2026-08-02">
     <svg class="event-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.09 6.94L22 9l-5.5 5.36L17.8 22 12 18.27 6.2 22l1.3-7.64L2 9l6.91-1.06z"/></svg>
     <div class="event-card">
+      <span class="event-status"></span>
       <div class="event-media"><img src="img/festa-country.jpg" alt="Locandina Country San Bassano 2a edizione, 2 agosto 2026" loading="lazy"></div>
       <div class="event-kicker">Festa country</div>
       <div class="event-date">Domenica 2 agosto 2026 <span class="event-time">· ore 18:00</span></div>
@@ -489,9 +536,10 @@
     </div>
   </article>
 
-  <article class="event">
+  <article class="event" data-date="2026-08-06">
     <svg class="event-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.09 6.94L22 9l-5.5 5.36L17.8 22 12 18.27 6.2 22l1.3-7.64L2 9l6.91-1.06z"/></svg>
     <div class="event-card">
+      <span class="event-status"></span>
       <div class="event-media"><img src="img/danilo-rancati.jpg" alt="Danilo Rancati Band" loading="lazy"></div>
       <div class="event-kicker">I giovedì d'estate</div>
       <div class="event-date">Giovedì 6 agosto 2026 <span class="event-time">· ore 21:00</span></div>
@@ -501,9 +549,10 @@
     </div>
   </article>
 
-  <article class="event">
+  <article class="event" data-date="2026-08-13">
     <svg class="event-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.09 6.94L22 9l-5.5 5.36L17.8 22 12 18.27 6.2 22l1.3-7.64L2 9l6.91-1.06z"/></svg>
     <div class="event-card">
+      <span class="event-status"></span>
       <div class="event-media"><img src="img/germano-one.jpg" alt="Germano #ONE" loading="lazy"></div>
       <div class="event-kicker">I giovedì d'estate</div>
       <div class="event-date">Giovedì 13 agosto 2026 <span class="event-time">· ore 21:00</span></div>
@@ -513,9 +562,10 @@
     </div>
   </article>
 
-  <article class="event">
+  <article class="event" data-date="2026-08-20">
     <svg class="event-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.09 6.94L22 9l-5.5 5.36L17.8 22 12 18.27 6.2 22l1.3-7.64L2 9l6.91-1.06z"/></svg>
     <div class="event-card">
+      <span class="event-status"></span>
       <div class="event-media"><img src="img/laura-talenti.jpg" alt="Laura Talenti Orchestra" loading="lazy"></div>
       <div class="event-kicker">I giovedì d'estate</div>
       <div class="event-date">Giovedì 20 agosto 2026 <span class="event-time">· ore 21:00</span></div>
@@ -525,9 +575,10 @@
     </div>
   </article>
 
-  <article class="event">
+  <article class="event" data-date="2026-08-21">
     <svg class="event-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.09 6.94L22 9l-5.5 5.36L17.8 22 12 18.27 6.2 22l1.3-7.64L2 9l6.91-1.06z"/></svg>
     <div class="event-card">
+      <span class="event-status"></span>
       <div class="event-media"><img src="img/effettoliga.jpg" alt="Effettoliga - Ligabue Tribute Band" loading="lazy"></div>
       <div class="event-kicker">Serata evento: tributo a Ligabue</div>
       <div class="event-date">Venerdì 21 agosto 2026 <span class="event-time">· ore 21:30</span></div>
@@ -537,9 +588,10 @@
     </div>
   </article>
 
-  <article class="event">
+  <article class="event" data-date="2026-08-27">
     <svg class="event-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.09 6.94L22 9l-5.5 5.36L17.8 22 12 18.27 6.2 22l1.3-7.64L2 9l6.91-1.06z"/></svg>
     <div class="event-card">
+      <span class="event-status"></span>
       <div class="event-media"><img src="img/gino-e-la-band.jpg" alt="Gino e la Band" loading="lazy"></div>
       <div class="event-kicker">I giovedì d'estate</div>
       <div class="event-date">Giovedì 27 agosto 2026 <span class="event-time">· ore 21:00</span></div>
@@ -549,9 +601,10 @@
     </div>
   </article>
 
-  <article class="event">
+  <article class="event" data-date="2026-08-28">
     <svg class="event-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l3.09 6.94L22 9l-5.5 5.36L17.8 22 12 18.27 6.2 22l1.3-7.64L2 9l6.91-1.06z"/></svg>
     <div class="event-card">
+      <span class="event-status"></span>
       <div class="event-media"><img src="img/sensazione-moda.jpg" alt="Sensazione Modà - Modà Tribute Band" loading="lazy"></div>
       <div class="event-kicker">Serata evento: tributo ai Modà</div>
       <div class="event-date">Venerdì 28 agosto 2026 <span class="event-time">· ore 21:30</span></div>
@@ -673,6 +726,37 @@
       });
     }, { threshold: 0.15 });
     items.forEach(el => io.observe(el));
+  })();
+
+  // Segna le serate già svolte e la prossima in programma
+  (function(){
+    const items = document.querySelectorAll('.event[data-date]');
+    if(!items.length) return;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let nextEl = null;
+    let nextDate = null;
+
+    items.forEach(el => {
+      const eventDate = new Date(el.dataset.date + 'T00:00:00');
+      const statusEl = el.querySelector('.event-status');
+
+      if(eventDate < today){
+        el.classList.add('is-past');
+        if(statusEl) statusEl.textContent = 'Serata conclusa';
+      } else if(!nextDate || eventDate < nextDate){
+        nextDate = eventDate;
+        nextEl = el;
+      }
+    });
+
+    if(nextEl){
+      nextEl.classList.add('is-next');
+      const statusEl = nextEl.querySelector('.event-status');
+      if(statusEl) statusEl.textContent = 'Prossima serata';
+    }
   })();
 </script>
 
