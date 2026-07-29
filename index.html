@@ -501,6 +501,110 @@
     *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
     html{ scroll-behavior:auto; }
   }
+
+  /* ---------- Print button (screen only) ---------- */
+  .btn-print{
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    margin-top:1.6rem;
+    padding:0.6rem 1.2rem;
+    font-family:'Manrope', sans-serif;
+    font-size:0.88rem;
+    font-weight:600;
+    letter-spacing:0.02em;
+    color:var(--night-deep);
+    background:var(--gold-soft);
+    border:none;
+    border-radius:999px;
+    cursor:pointer;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-print:hover{
+    transform:translateY(-1px);
+    box-shadow:0 8px 20px -8px rgba(232,182,74,0.6);
+  }
+  .btn-print svg{ width:16px; height:16px; }
+
+  /* ---------- Print stylesheet ---------- */
+  @media print{
+    *{ animation:none !important; transition:none !important; }
+
+    body{ background:#fff; color:#111; }
+
+    #stars-canvas, .scroll-cue, .btn-print, .event-status{
+      display:none !important;
+    }
+
+    .hero{
+      min-height:auto;
+      padding:1rem 0 1.5rem;
+      background:none;
+    }
+    .hero h1{ color:#111; text-shadow:none; }
+    .hero .year{ color:#111; }
+    .hero .lede, .hero .patrocinio{ color:#333; }
+    .eyebrow{ color:#333; border-color:#999; }
+
+    .intro{ padding:1rem 0; }
+    .intro h2{ color:#111; }
+    .intro p{ color:#333; }
+
+    .calendar{ padding:0.5rem 0 1.5rem; max-width:100%; }
+    .calendar::before{ display:none; }
+
+    .event{
+      opacity:1 !important;
+      transform:none !important;
+      width:100% !important;
+      padding:0 0 1rem 0 !important;
+      text-align:left !important;
+      margin:0 0 1rem 0 !important;
+      break-inside:avoid;
+      page-break-inside:avoid;
+    }
+    .event-star{ display:none; }
+
+    .event-card{
+      background:#fff !important;
+      border:1px solid #ccc !important;
+      box-shadow:none !important;
+      backdrop-filter:none !important;
+      padding:1rem 1.2rem !important;
+    }
+    .event-kicker{ color:#555 !important; }
+    .event-date{ color:#333 !important; }
+    .event-time{ color:#555 !important; }
+    .event-title{ color:#111 !important; }
+    .event-artist{ color:#333 !important; }
+    .event-tag{ border:1px solid #999; background:none !important; color:#111 !important; }
+    .event-media{ border:1px solid #ccc; max-width:220px; }
+    .event-media img{ filter:none !important; }
+
+    .menu-section{ padding:0.5rem 0 1.5rem; }
+    .menu-section h2{ color:#111; }
+    .menu-section p.sub{ color:#333; }
+    .menu-card{
+      background:#fff !important;
+      border:1px solid #ccc !important;
+      box-shadow:none !important;
+      break-inside:avoid;
+      page-break-inside:avoid;
+    }
+    .menu-icon{ color:#111 !important; }
+    .menu-card h3{ color:#111 !important; }
+    .menu-card p{ color:#333 !important; }
+    .menu-download{ color:#111 !important; border-color:#999; }
+    .menu-download::after{ content:" — " attr(href); font-size:0.75em; color:#555; }
+
+    .info{ background:#fff !important; border-top:1px solid #ccc !important; }
+    .info h3{ color:#111 !important; }
+    .info p, .info a.link{ color:#333 !important; }
+    .info a.link::after{ content:" — " attr(href); font-size:0.75em; color:#555; }
+    .badge-free{ color:#111 !important; }
+
+    footer.credits{ color:#666 !important; }
+  }
 </style>
 </head>
 <body>
@@ -519,6 +623,10 @@
 <section class="intro">
   <h2>Ogni settimana, una serata da vivere in piazza</h2>
   <p>Dal 2 al 28 agosto, il Centro Sportivo di San Bassano si accende per sette appuntamenti gratuiti. Bar e cucina sempre attivi, ingresso libero per tutti.</p>
+  <button class="btn-print" onclick="window.print()" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Stampa il programma
+  </button>
 </section>
 
 <section class="calendar" id="programma">
@@ -618,7 +726,7 @@
 
 <section class="menu-section">
   <h2>I menù delle serate</h2>
-  <p class="sub">Scarica in anteprima i nostri menù</p>
+  <p class="sub">Scarica in anteprima cosa trovi allo stand gastronomico, sera per sera.</p>
   <div class="menu-grid">
 
     <div class="menu-card">
@@ -758,6 +866,13 @@
       if(statusEl) statusEl.textContent = 'Prossima serata';
     }
   })();
+
+  // Garantisce che tutte le immagini siano caricate prima della stampa
+  window.addEventListener('beforeprint', () => {
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+      img.loading = 'eager';
+    });
+  });
 </script>
 
 </body>
